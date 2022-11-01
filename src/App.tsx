@@ -13,7 +13,7 @@ interface IMovieData {
 }
 
 const StyledApp = styled.div`
-  
+  padding-bottom: 100px;
 `
 
 const StyledMovieCardContainer = styled.div`
@@ -27,13 +27,15 @@ const StyledMovieCardContainer = styled.div`
 
 function App() {
   const [movieData, setMovieData] = useState<IMovieData[]>([]);
+  const [titleInput, setTitleInput] = useState("");
+  const [yearInput, setYearInput] = useState<Number>();
 
 
   useEffect(() => {
     axios
       .get("http://www.omdbapi.com/", {
         params: {
-          s: "test",
+          s: "welcome",
           page: 2,
           apikey: "8f7a576e",
         },
@@ -43,12 +45,27 @@ function App() {
       }
   , [])
 
+  const handleSubmit = () => {
+    {
+      axios
+        .get("http://www.omdbapi.com/", {
+          params: {
+            s: titleInput,
+            page: 1,
+            apikey: "8f7a576e",
+          },
+        })
+        .then(res => setMovieData(res.data.Search));
+        }
+  }
+    
+
 console.log(movieData);
 
   return (
     <StyledApp>
       <Header />
-      <SearchBars />
+      <SearchBars setTitleInput = {setTitleInput} setYearInput = {setYearInput} handleSubmit = {handleSubmit}/>
       <StyledMovieCardContainer>
         {movieData.map(movie => <MovieCard img = {movie.Poster} title={movie.Title} yearOfRelease={movie.Year}/>)}
       </StyledMovieCardContainer>

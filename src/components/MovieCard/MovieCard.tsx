@@ -10,7 +10,7 @@ const MovieCard:React.FC<IImageProps> = (props) => {
 
     const StyledMovieCardParagraph = styled.p `
         font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-
+        padding-bottom: 8px;
     `
 
     const StyledMovieCard = styled.div `
@@ -42,7 +42,6 @@ const MovieCard:React.FC<IImageProps> = (props) => {
         </StyledMovieInfo>
         </StyledMovieCard>
     )
-
 }
 
 export default MovieCard;
