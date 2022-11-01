@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import styled from "styled-components";
 import SearchBars from "./components/SearchBars/SearchBars";
 import MovieCard from "./components/MovieCard/MovieCard";
-import { setDefaultResultOrder } from "dns";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface IMovieData {
   Title: string;
@@ -27,43 +27,44 @@ const StyledMovieCardContainer = styled.div`
 
 function App() {
   const [movieData, setMovieData] = useState<IMovieData[]>([]);
+  const [page, setPage] = useState(1);
   const [titleInput, setTitleInput] = useState("test");
   const [yearInput, setYearInput] = useState<Number>();
+
 
   useEffect(() => {
     axios
       .get("http://www.omdbapi.com/", {
         params: {
           s: titleInput,
-          page: 1,
+          page: page,
           apikey: "8f7a576e",
         },
       })
       .then((res) => {
-        if (res && res.data && res.data.Search) setMovieData(res.data.Search);
+        if (res && res.data && res.data.Search) setMovieData([...movieData, ...res.data.Search]);
       });
-  }, [titleInput]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://www.omdbapi.com/", {
-  //       params: {
-  //         s: titleInput,
-  //         page: 1,
-  //         apikey: "8f7a576e",
-  //       },
-  //     })
-  //     .then((res) => setMovieData(res.data.Search));
-  // }, [titleInput]);
+  }, [titleInput, page]);
 
   return (
     <StyledApp>
       <Header />
       <SearchBars setTitleInput={setTitleInput} setYearInput={setYearInput} />
       <StyledMovieCardContainer>
+      <InfiniteScroll
+      className="infinite-scroll"
+        dataLength={movieData.length}
+        loader={<h4>Loading...</h4>}
+        hasMore={true}
+        next={() => {
+          setPage(page + 1);
+        }}
+      >       
+          
         {movieData &&
           movieData.length >= 1 &&
           movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
+          </InfiniteScroll>
       </StyledMovieCardContainer>
     </StyledApp>
   );

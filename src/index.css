@@ -3,3 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.infinite-scroll {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 11% 0 11%;
+}
