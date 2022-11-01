@@ -8,7 +8,7 @@ import MovieCard from './components/MovieCard/MovieCard';
 
 interface IMovieData {
   Title: string,
-  YearOfRelease: string,
+  Year: string,
   Poster: string
 }
 
@@ -38,7 +38,7 @@ function App() {
           apikey: "8f7a576e",
         },
       })
-      .then((res) => setMovieData(res.data));
+      .then(res => setMovieData(res.data.Search));
   
       }
   , [])
@@ -50,16 +50,7 @@ console.log(movieData);
       <Header />
       <SearchBars />
       <StyledMovieCardContainer>
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
+        {movieData.map(movie => <MovieCard img = {movie.Poster} title={movie.Title} yearOfRelease={movie.Year}/>)}
       </StyledMovieCardContainer>
     </StyledApp>
   );

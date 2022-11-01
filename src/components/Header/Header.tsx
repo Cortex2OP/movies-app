@@ -38,13 +38,13 @@ const StyledLogo = styled.img `
 const Header: FC = () => {
   return (
     <StyledHeaderWrapper>
-    <StyledHeader>
-      <StyledLogo src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-2.png"></StyledLogo>
-      <LinksComponent>
-      <p>MOVIES</p>
-      <p>SERIES</p>
-      </LinksComponent>
-    </StyledHeader>
+      <StyledHeader>
+        <StyledLogo src="https://www.freeiconspng.com/thumbs/movie-icon/movie-icon-2.png"></StyledLogo>
+        <LinksComponent>
+          <p>MOVIES</p>
+          <p>SERIES</p>
+        </LinksComponent>
+      </StyledHeader>
     </StyledHeaderWrapper>
   );
 };

@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
-const MovieCard:React.FC = () => {
+interface IImageProps{
+    img: string
+    title: string,
+    yearOfRelease: string,
+}
+
+const MovieCard:React.FC<IImageProps> = (props) => {
+
+    const StyledMovieCardParagraph = styled.p `
+        font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+
+    `
 
     const StyledMovieCard = styled.div `
         display: flex;
@@ -11,22 +22,23 @@ const MovieCard:React.FC = () => {
     
     const StyledMovieCover = styled.img `
             max-width: 350px;
+            height: 100%;
     `
 
     const StyledMovieInfo = styled.div `
-            border: 0 solid #e2e8f0;
-            box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.28);
-            -webkit-box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.28);
-            -moz-box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.28);
+            box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.21);
+            -webkit-box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.21);
+            -moz-box-shadow: -1px 4px 14px 4px rgba(0,0,0,0.21);
             width: 350px;
+            padding: 25px 0 25px 10px;
     `
     
     return (
         <StyledMovieCard>
-        <StyledMovieCover src="https://m.media-amazon.com/images/M/MV5BMTI1MTY2OTIxNV5BMl5BanBnXkFtZTYwNjQ4NjY3._V1_FMjpg_UX1000_.jpg"></StyledMovieCover>
+        <StyledMovieCover src={props.img}></StyledMovieCover>
         <StyledMovieInfo>
-            <p style={{fontWeight: "bold"}}>Title:</p>
-            <p style={{fontWeight: "bold"}}>Year of Release:</p>
+            <StyledMovieCardParagraph><span style={{fontWeight: "bold"}}>Title: </span>{props.title}</StyledMovieCardParagraph>
+            <StyledMovieCardParagraph><span style={{fontWeight: "bold"}}>Year of Release: </span>{props.yearOfRelease}</StyledMovieCardParagraph>
         </StyledMovieInfo>
         </StyledMovieCard>
     )
