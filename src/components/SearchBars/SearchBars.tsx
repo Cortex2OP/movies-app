@@ -4,7 +4,6 @@ import styled from "styled-components";
 interface ISearchBarProps {
     setTitleInput: any,
     setYearInput: any,
-    handleSubmit: any,
 }
 
 const SearchForms = styled.form`
@@ -25,9 +24,9 @@ const SearchBars: React.FC<ISearchBarProps> = (props) => {
             </label>
         <label>
           Year:
-          <input type="text" name="year" onChange={(e) => props.setYearInput(parseInt(e.target.value))} />
+          <input type="text" name="year" />
         </label>
-        <input type="submit" value="Submit" onClick={props.handleSubmit}/>
+        <input type="submit" value="Submit" />
       </SearchForms>
     </>
   );

@@ -1,73 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import axios from 'axios';
-import Header from './components/Header/Header';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import axios from "axios";
+import Header from "./components/Header/Header";
 import styled from "styled-components";
-import SearchBars from './components/SearchBars/SearchBars';
-import MovieCard from './components/MovieCard/MovieCard';
+import SearchBars from "./components/SearchBars/SearchBars";
+import MovieCard from "./components/MovieCard/MovieCard";
+import { setDefaultResultOrder } from "dns";
 
 interface IMovieData {
-  Title: string,
-  Year: string,
-  Poster: string
+  Title: string;
+  Year: string;
+  Poster: string;
+  imdbID: string;
 }
 
 const StyledApp = styled.div`
   padding-bottom: 100px;
-`
+`;
 
 const StyledMovieCardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 0 11% 0 11%;  
-
-`
-
+  margin: 0 11% 0 11%;
+`;
 
 function App() {
   const [movieData, setMovieData] = useState<IMovieData[]>([]);
-  const [titleInput, setTitleInput] = useState("");
+  const [titleInput, setTitleInput] = useState("test");
   const [yearInput, setYearInput] = useState<Number>();
-
 
   useEffect(() => {
     axios
       .get("http://www.omdbapi.com/", {
         params: {
-          s: "welcome",
-          page: 2,
+          s: titleInput,
+          page: 1,
           apikey: "8f7a576e",
         },
       })
-      .then(res => setMovieData(res.data.Search));
-  
-      }
-  , [])
+      .then((res) => {
+        if (res && res.data && res.data.Search) setMovieData(res.data.Search);
+      });
+  }, [titleInput]);
 
-  const handleSubmit = () => {
-    {
-      axios
-        .get("http://www.omdbapi.com/", {
-          params: {
-            s: titleInput,
-            page: 1,
-            apikey: "8f7a576e",
-          },
-        })
-        .then(res => setMovieData(res.data.Search));
-        }
-  }
-    
-
-console.log(movieData);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://www.omdbapi.com/", {
+  //       params: {
+  //         s: titleInput,
+  //         page: 1,
+  //         apikey: "8f7a576e",
+  //       },
+  //     })
+  //     .then((res) => setMovieData(res.data.Search));
+  // }, [titleInput]);
 
   return (
     <StyledApp>
       <Header />
-      <SearchBars setTitleInput = {setTitleInput} setYearInput = {setYearInput} handleSubmit = {handleSubmit}/>
+      <SearchBars setTitleInput={setTitleInput} setYearInput={setYearInput} />
       <StyledMovieCardContainer>
-        {movieData.map(movie => <MovieCard img = {movie.Poster} title={movie.Title} yearOfRelease={movie.Year}/>)}
+        {movieData &&
+          movieData.length >= 1 &&
+          movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
       </StyledMovieCardContainer>
     </StyledApp>
   );
