@@ -6,6 +6,7 @@ import styled from "styled-components";
 import SearchBars from "./components/SearchBars/SearchBars";
 import MovieCard from "./components/MovieCard/MovieCard";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import MovieList from "./components/MovieList/MovieList";
 
 interface IMovieData {
   Title: string;
@@ -39,7 +40,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log("loading....")
     axios
       .get("http://www.omdbapi.com/", {
         params: {
@@ -49,8 +49,6 @@ function App() {
         },
       })
       .then((res) => {
-        console.log(res)
-        // if (res && res.data && res.data.Search) setMovieData([...movieData, ...res.data.Search]);
         if (res && res.data && res.data.Search) setMovieData(page===1?res.data.Search:[...movieData, ...res.data.Search]);
 
       });
@@ -61,20 +59,7 @@ function App() {
       <Header />
       <SearchBars setTitleInput={setTitleInput} setYearInput={setYearInput} />
       <StyledMovieCardContainer>
-      <InfiniteScroll
-      className="infinite-scroll"
-        dataLength={movieData.length}
-        loader={<h4>Loading...</h4>}
-        hasMore={true}
-        next={() => {
-          setPage(page + 1);
-        }}
-      >       
-          
-        {movieData &&
-          movieData.length >= 1 &&
-          movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
-          </InfiniteScroll>
+          <MovieList page = {page} setPage = {setPage} movieData = {movieData} setMovieData = {setMovieData}/>
       </StyledMovieCardContainer>
     </StyledApp>
   );

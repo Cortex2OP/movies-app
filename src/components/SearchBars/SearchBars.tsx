@@ -14,7 +14,8 @@ const StyledInput = styled.input `
 const SearchForms = styled.form`
   margin: 0 40% 0 40%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   padding-top: 30px;
   flex-direction: column;
 
