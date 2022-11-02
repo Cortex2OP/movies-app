@@ -7,6 +7,7 @@ import SearchBars from "./components/SearchBars/SearchBars";
 import MovieCard from "./components/MovieCard/MovieCard";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MovieList from "./components/MovieList/MovieList";
+import SeriesList from "./components/SeriesList/SeriesList";
 
 interface IMovieData {
   Title: string;
@@ -60,8 +61,11 @@ function App() {
       <Header />
       <SearchBars setTitleInput={setTitleInput} setYearInput={setYearInput} />
       <StyledMovieCardContainer>
-          <MovieList page = {page} setPage = {setPage} movieData = {movieData} setMovieData = {setMovieData}/>
-      </StyledMovieCardContainer>
+          {
+            //<MovieList page = {page} setPage = {setPage} movieData = {movieData} setMovieData = {setMovieData}/>
+          }
+          <SeriesList titleInput = {titleInput}/>
+            </StyledMovieCardContainer>
     </StyledApp>
   );
 }
