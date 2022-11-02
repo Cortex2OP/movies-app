@@ -25,7 +25,9 @@ const MovieDetails: React.FC = () => {
       });
   }, [id]);
 
-  return <img src="https://blog.logrocket.com/wp-content/uploads/2020/11/movie-search-app.png"></img>;
+  return (
+    
+  );
 };
 
 export default MovieDetails;
