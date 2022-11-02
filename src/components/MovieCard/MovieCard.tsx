@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledMovieCardParagraph = styled.p`
@@ -40,8 +41,10 @@ interface IImageProps {
 }
 
 const MovieCard: React.FC<IImageProps> = (props) => {
+  const navigate = useNavigate();
+  
   return (
-    <StyledMovieCard>
+    <StyledMovieCard onClick={() => navigate("/")}>
       <StyledMovieCover src={props.img !== "N/A" ? props.img : "https://t4.ftcdn.net/jpg/01/41/37/75/360_F_141377507_5L5rW5qp3c0imYgWZyNJRr3n2aws0i7w.jpg"}></StyledMovieCover>
       <StyledMovieInfo>
         <StyledMovieCardParagraph>

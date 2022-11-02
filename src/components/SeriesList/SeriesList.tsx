@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "../MovieCard/MovieCard";
 
+
 interface ISeriesData {
   Title: string;
   Year: string;
@@ -12,7 +13,7 @@ interface ISeriesData {
 
 interface ISeriesList {
   titleInput: string,
-
+  setTitleInput: any
 }
 
 const SeriesList: React.FC<ISeriesList> = (props) => {
