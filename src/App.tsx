@@ -31,8 +31,11 @@ function App() {
   const [titleInput, setTitleInput] = useState("test");
   const [yearInput, setYearInput] = useState<Number>();
 
+  
+
 
   useEffect(() => {
+    console.log("loading....")
     axios
       .get("http://www.omdbapi.com/", {
         params: {
@@ -42,9 +45,12 @@ function App() {
         },
       })
       .then((res) => {
-        if (res && res.data && res.data.Search) setMovieData([...movieData, ...res.data.Search]);
+        console.log(res)
+        // if (res && res.data && res.data.Search) setMovieData([...movieData, ...res.data.Search]);
+        if (res && res.data && res.data.Search) setMovieData(page===1?res.data.Search:[...movieData, ...res.data.Search]);
+
       });
-  }, [titleInput, page]);
+  }, [page, titleInput]);
 
   return (
     <StyledApp>

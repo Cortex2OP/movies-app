@@ -4,6 +4,7 @@ const StyledMovieCardParagraph = styled.p`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   padding-bottom: 5px;
+  margin-top: 20px;
 `;
 
 const StyledMovieCard = styled.div`
@@ -11,6 +12,7 @@ const StyledMovieCard = styled.div`
   flex-direction: column;
   width: 350px;
   padding-top: 50px;
+  padding: 50px 10px 0px 10px;
 `;
 
 const StyledMovieCover = styled.img`
@@ -22,8 +24,9 @@ const StyledMovieInfo = styled.div`
   box-shadow: -1px 4px 14px 4px rgba(0, 0, 0, 0.21);
   -webkit-box-shadow: -1px 4px 14px 4px rgba(0, 0, 0, 0.21);
   -moz-box-shadow: -1px 4px 14px 4px rgba(0, 0, 0, 0.21);
-  width: 350px;
-  padding: 25px 0 25px 10px;
+  width: 330px;
+  padding: 15px 0 40px 10px;
+  height: 140px;
 `;
 
 interface IImageProps {
