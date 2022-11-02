@@ -13,6 +13,10 @@ const StyledHeader = styled.nav`
     padding: 15px;
   }
 
+  @media (max-width: 480px) {
+   margin: 0;
+  }
+
 `;
 
 const LinksComponent = styled.div `
@@ -24,6 +28,17 @@ const LinksComponent = styled.div `
         font-family: Arial, Helvetica, sans-serif;
         color: white;
     }
+
+    @media (max-width: 480px) {
+
+
+      & p {
+        padding: 0 30px 0 30px;
+
+      }
+
+      
+  }
 `
 
 const StyledHeaderWrapper = styled.div`

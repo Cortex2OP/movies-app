@@ -23,6 +23,10 @@ const StyledMovieCardContainer = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0 11% 0 11%;
+
+  @media (max-width: 480px) {
+   margin: 0;
+  }
 `;
 
 function App() {

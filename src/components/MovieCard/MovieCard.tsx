@@ -13,6 +13,10 @@ const StyledMovieCard = styled.div`
   width: 350px;
   padding-top: 50px;
   padding: 50px 10px 0px 10px;
+
+  @media (max-width: 480px) {
+   
+  }
 `;
 
 const StyledMovieCover = styled.img`
