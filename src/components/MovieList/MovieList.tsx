@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "../MovieCard/MovieCard";
 
@@ -9,29 +11,47 @@ interface IMovieData {
   }
 
 interface IMovieList {
-    page: number,
-    setPage: any,
-    movieData: Array<IMovieData>,
-    setMovieData: any,
+    titleInput: string,
+    setTitleInput: any,
 }
 
 
 
+
 const MovieList: React.FC<IMovieList> = (props) => {
+    const [movieData, setMovieData] = useState<IMovieData[]>([]);
+    const [page, setPage] = useState(1);
+    
+    useEffect(() => {
+        axios
+          .get("http://www.omdbapi.com/", {
+            params: {
+              s: props.titleInput,
+              page: page,
+              apikey: "8f7a576e",
+              type: "movie"
+            },
+          })
+          .then((res) => {
+            if (res && res.data && res.data.Search) setMovieData(page===1?res.data.Search:[...movieData, ...res.data.Search]);
+    
+          });
+      }, [page, props.titleInput]);
+
     return (
         <InfiniteScroll
       className="infinite-scroll"
-        dataLength={props.movieData.length}
+        dataLength={movieData.length}
         loader={<h4>Loading...</h4>}
         hasMore={true}
         next={() => {
-          props.setPage(props.page + 1);
+          setPage(page + 1);
         }}
       >       
           
-        {props.movieData &&
-          props.movieData.length >= 1 &&
-          props.movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
+          {movieData &&
+          movieData.length >= 1 &&
+          movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
           </InfiniteScroll>
     )
 }
