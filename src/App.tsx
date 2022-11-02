@@ -46,6 +46,7 @@ function App() {
           s: titleInput,
           page: page,
           apikey: "8f7a576e",
+          type: "movie"
         },
       })
       .then((res) => {
