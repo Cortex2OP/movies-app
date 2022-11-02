@@ -48,7 +48,7 @@ const SeriesList: React.FC<ISeriesList> = (props) => {
     >
       {seriesData &&
         seriesData.length >= 1 &&
-        seriesData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
+        seriesData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} id={movie.imdbID}/>)}
     </InfiniteScroll>
   );
 };

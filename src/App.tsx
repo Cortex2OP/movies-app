@@ -6,6 +6,7 @@ import SearchBars from "./components/SearchBars/SearchBars";
 import MovieList from "./components/MovieList/MovieList";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import SeriesList from "./components/SeriesList/SeriesList";
+import MovieDetails from "./components/MovieDetails/MovieDetails";
 
 interface IMovieData {
   Title: string;
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MovieList titleInput={titleInput} setTitleInput = {setTitleInput}/>}></Route>
           <Route path="/series" element={<SeriesList titleInput={titleInput} setTitleInput = {setTitleInput}/>}></Route>
+          <Route path="/movieDetails/:id" element={<MovieDetails/> }/>
         </Routes>
       </Router>
     </StyledApp>

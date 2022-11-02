@@ -55,6 +55,7 @@ const StyledLogo = styled.img `
 
 const Header: FC = () => {
   const navigate = useNavigate();
+  
   return (
     <StyledHeaderWrapper>
       <StyledHeader>

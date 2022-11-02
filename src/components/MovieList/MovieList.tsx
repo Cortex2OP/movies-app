@@ -33,8 +33,9 @@ const MovieList: React.FC<IMovieList> = (props) => {
             },
           })
           .then((res) => {
-            if (res && res.data && res.data.Search) setMovieData(page===1?res.data.Search:[...movieData, ...res.data.Search]);
-    
+            if (res && res.data && res.data.Search) { setMovieData(page===1?res.data.Search:[...movieData, ...res.data.Search]);
+                console.log(res.data.Search);
+            }
           });
       }, [page, props.titleInput]);
 
@@ -42,7 +43,7 @@ const MovieList: React.FC<IMovieList> = (props) => {
         <InfiniteScroll
       className="infinite-scroll"
         dataLength={movieData.length}
-        loader={<h4>Loading...</h4>}
+        loader={<h4></h4>}
         hasMore={true}
         next={() => {
           setPage(page + 1);
@@ -51,7 +52,7 @@ const MovieList: React.FC<IMovieList> = (props) => {
           
           {movieData &&
           movieData.length >= 1 &&
-          movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} />)}
+          movieData.map((movie) => <MovieCard key={movie.imdbID} img={movie.Poster} title={movie.Title} yearOfRelease={movie.Year} id={movie.imdbID}/>)}
           </InfiniteScroll>
     )
 }
